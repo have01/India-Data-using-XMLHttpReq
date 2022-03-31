@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <h1>JavaScript Project using  XMLHttpRequest();
+        <br> Api : <a href=" https://restcountries.com/v2/alpha/ind">Link</a>
+    </h1>
+    
+     <div id="container">
+       
+    <p></p>
+    </div>
+</body>
+<script>
+    const container= document.querySelector("#container");
+    const request = new XMLHttpRequest();
+    request.open('GET',"https://restcountries.com/v2/alpha/ind");
+    request.send();
+
+    //to get response 
+    request.addEventListener('load',function(){
+      
+        const obj = JSON.parse(this.responseText);
+        // console.log(data.name);
+        // document.querySelector("p").innerHTML=(data.name)
+      
+      var htmlString = `
+     <div class="flag">
+         <img src="${obj.flag}" alt="flag"></div> 
+ 
+ <h1 class="item__description">${obj.name}</h1>
+  <h1 class="item__description"> Capital:${obj.capital}</h1>
+  <h1 class="item__description"> Currencie:${obj.currencies.map ((val)=> val.code )}</h1>
+   <h1 class="item__description">Region  :  ${obj.region}</h1>
+    <h1 class="item__description">Population :${obj.population}</h1>
+  
+           
+        </div>`
+        container.insertAdjacentHTML("afterbegin",htmlString)
+    })
+</script>
+</html>
